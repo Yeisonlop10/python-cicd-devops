@@ -17,6 +17,12 @@ dependencies = [
     "click>=8.0,<9.0"
 ]
 
+[project.optional-dependencies]
+dev = [
+    "ruff",
+    "black",
+]
+
 [project.scripts]
 check-urls="simple_http_checker.cli:main"
 
@@ -25,3 +31,9 @@ package-dir = {"" = "src"}
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.ruff]
+line-length = 88
+
+[tool.black]
+line-length = 88
