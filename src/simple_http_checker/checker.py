@@ -36,10 +36,10 @@ def check_urls(urls: Collection[str], timeout: int = 5) -> dict[str, str]:
             logger.warning(f"URL {url} timed out after {timeout} seconds.")
         except requests.exceptions.ConnectionError as e:
             logger.error(f"Error checking URL {url}: {e}")
-            status = f"CONNECTION ERROR: {type(e).__name__}"
+            status = "CONNECTION_ERROR"
             logger.warning(f"URL {url} could not be reached.")
         except requests.exceptions.RequestException as e:
-            status = f"REQUEST ERROR: {type(e).__name__}"
+            status = "REQUEST_ERROR"
             logger.error(f"Error checking URL {url}: {e}", exc_info=True)
 
         results[url] = status

@@ -14,7 +14,7 @@ logger = logging.getLogger(__name__)
 
 
 @click.command()
-@click.argument("urls", nargs=-1, required=True)
+@click.argument("urls", nargs=-1, required=False)
 @click.option("--timeout", default=5, help="Timeout for HTTP requests in seconds")
 @click.option("--verbose", "-v", is_flag=True, help="Enable verbose logging")
 def main(urls: Collection[str], timeout: int, verbose: bool):
@@ -33,11 +33,11 @@ def main(urls: Collection[str], timeout: int, verbose: bool):
     )
     results = check_urls(urls, timeout=timeout)
 
-    click.echo("\nURL Check Results:")
+    click.echo("--- Results ---")
     for url, status in results.items():
         if "OK" in status:
-            click.echo(click.style(f"{url:<40}: {status}", fg="green"))
+            click.echo(click.style(f"{url} -> {status}", fg="green"))
         elif "FAIL" in status or "ERROR" in status:
-            click.echo(click.style(f"{url:<40}: {status}", fg="red"))
+            click.echo(click.style(f"{url} -> {status}", fg="red"))
         else:
-            click.echo(click.style(f"{url}: {status}", fg="yellow"))
+            click.echo(click.style(f"{url} -> {status}", fg="yellow"))
